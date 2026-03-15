@@ -1,0 +1,256 @@
+/* Основные стили для всего сайта */
+body {
+    background: #1abc9c;
+    font-family: Tahoma, Arial, sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для шапки сайта */
+.header {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header img {
+    height: 50px;
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Стили для меню в шапке */
+.header-menu {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.username {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.menu-btn {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.new-post-btn {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.new-post-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Стили для основного контейнера архива */
+.archive {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Стили для отдельного поста */
+.one-post {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.one-post:hover {
+    transform: translateY(-5px);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Стили для заголовка поста */
+.post-title {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.post-title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для информации о статье (автор и дата) */
+.article-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 14px;
+}
+
+.article-author {
+    font-weight: bold;
+}
+
+.article-created-date {
+    text-align: right;
+}
+
+/* Стили для текста статьи */
+.article-text {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Стили для таблиц (из ЛР2) */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: none;
+    padding: 8px;
+}
+
+tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Стили для списков */
+ul, ol {
+    margin: 5px 0 20px 0;
+}
+
+/* Стили для заголовков */
+h1 {
+    font-family: 'Times New Roman', serif;
+}
+
+h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+/* Стили для изображений */
+img {
+    height: 30px;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Стили для пустого состояния */
+.empty-message {
+    text-align: center;
+    font-size: 18px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Стили для ссылок */
+a {
+    color: #ffffff;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #ecf0f1;
+}
+
+/* Кнопка сворачивания */
+.fold-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.fold-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Свернутый пост */
+.one-post.folded .article-info,
+.one-post.folded .article-text {
+    display: none;
+}
+
+/* Футер */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.site-footer p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Кнопка "Наверх" */
+#topButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: #ffffff;
+    color: #1abc9c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+#topButton:hover {
+    background: #34495e;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Пустое сообщение */
+.empty-message {
+    text-align: center;
+    font-size: 18px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}

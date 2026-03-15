@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход в блог</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'img/logo.png' %}" alt="Логотип">
+        <a href="/" class="back-link">← На главную</a>
+    </div>
+    
+    <div class="content">
+        <h1>Вход в блог</h1>
+        
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="username">Имя пользователя:</label>
+                <input type="text" name="username" id="username" 
+                       placeholder="Введите имя пользователя" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" id="password" 
+                       placeholder="Введите пароль" required>
+            </div>
+            
+            {% if error %}
+            <div class="errors">
+                {{ error }}
+            </div>
+            {% endif %}
+            
+            <button type="submit" class="submit-btn">Войти</button>
+        </form>
+        
+        <p class="auth-link">
+            Еще нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a>
+        </p>
+    </div>
+</body>
+</html>

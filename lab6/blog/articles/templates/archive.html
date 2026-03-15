@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Архив всех статей</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="archive">
+    <div class="header">
+        <img src="{% static 'img/logo.png' %}" alt="Логотип">
+        <div class="header-title">
+            <h1>Коллективный блог</h1>
+        </div>
+        <div class="header-menu">
+            {% if user.is_authenticated %}
+                <span class="username">{{ user.username }}</span>
+                <a href="{% url 'create_post' %}" class="menu-btn">Новая статья</a>
+                <a href="{% url 'logout' %}" class="menu-btn">Выйти</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="menu-btn">Вход</a>
+                <a href="{% url 'register' %}" class="menu-btn">Регистрация</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="archive">
+        {% for post in posts %}
+        <div class="one-post">
+            <h2 class="post-title">
+                <a href="{% url 'get_article' post.id %}">{{ post.title }}</a>
+            </h2>
+            <div class="article-info">
+                <div class="article-author">{{ post.author.username }}</div>
+                <div class="article-created-date">{{ post.created_date }}</div>
+            </div>
+            <p class="article-text">{{ post.get_excerpt }}</p>
+        </div>
+        {% empty %}
+        <p>Пока нет статей. Создайте первую статью!</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
