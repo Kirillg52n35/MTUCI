@@ -1,4 +1,3 @@
-/* Основные стили для всего сайта */
 body {
     background: #1abc9c;
     font-family: Tahoma, Arial, sans-serif;
@@ -7,17 +6,24 @@ body {
     padding: 0;
 }
 
-/* Стили для шапки сайта */
+
 .header {
     background: rgba(0, 0, 0, 0.2);
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .header img {
     height: 50px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.header img:hover {
+    transform: scale(1.1);
 }
 
 .header-title h1 {
@@ -25,7 +31,7 @@ body {
     font-size: 24px;
 }
 
-/* Стили для меню в шапке */
+
 .header-menu {
     display: flex;
     gap: 10px;
@@ -68,31 +74,98 @@ body {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* Стили для основного контейнера архива */
+
+.content-wrapper {
+    position: relative;
+    z-index: 5;
+    background: #1abc9c;
+    min-height: 100vh;
+}
+
+
 .archive {
     max-width: 960px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* Стили для отдельного поста */
+/* Счетчик статей */
+.posts-counter {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: right;
+    font-size: 14px;
+}
+
+
 .one-post {
-    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+
+    border-radius: 10px;
     padding: 25px;
     margin-bottom: 30px;
-    border-radius: 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
     transition: transform 0.3s;
+
+    animation: slideUp 0.5s ease-out forwards;
+    animation-delay: calc(var(--post-index, 0) * 0.1s);
 }
 
 .one-post:hover {
     transform: translateY(-5px);
-    background: rgba(0, 0, 0, 0.3);
 }
 
-/* Стили для заголовка поста */
+/* Чередование постов */
+.post-even {
+    border-left: 5px solid rgba(255, 255, 255, 0.3);
+}
+
+.post-odd {
+    border-right: 5px solid rgba(255, 255, 255, 0.3);
+}
+
+
+.one-post-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    opacity: 0;
+    pointer-events: none;
+
+    border-radius: 10px;
+
+    transition: opacity 0.3s;
+}
+
+.one-post > *:not(.one-post-shadow) {
+    position: relative;
+    z-index: 2;
+}
+
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 .post-title {
     font-size: 28px;
-    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
 .post-title a {
@@ -104,13 +177,16 @@ body {
     text-decoration: underline;
 }
 
-/* Стили для информации о статье (автор и дата) */
+
 .article-info {
     display: flex;
     justify-content: space-between;
+
     margin-bottom: 15px;
     padding-bottom: 10px;
+
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
     font-size: 14px;
 }
 
@@ -119,16 +195,47 @@ body {
 }
 
 .article-created-date {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-/* Стили для текста статьи */
+
 .article-text {
     line-height: 1.6;
     font-size: 16px;
 }
 
-/* Стили для таблиц */
+
+.fold-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+
+    border: none;
+
+    padding: 5px 15px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition: all 0.3s;
+}
+
+.fold-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Свернутый пост */
+.one-post.folded .article-info,
+.one-post.folded .article-text {
+    display: none;
+}
+
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -144,12 +251,12 @@ tr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Стили для списков */
+
 ul, ol {
     margin: 5px 0 20px 0;
 }
 
-/* Стили для заголовков */
+
 h1 {
     font-family: 'Times New Roman', serif;
 }
@@ -160,23 +267,25 @@ h4 {
     color: #ffffff;
 }
 
-/* Стили для изображений */
-img {
+
+img:not(.icon-for-parallax) {
     height: 30px;
     display: block;
     margin: 20px auto;
 }
 
-/* Стили для пустого состояния */
+
 .empty-message {
     text-align: center;
     font-size: 18px;
     padding: 40px;
+
     background: rgba(0, 0, 0, 0.1);
+
     border-radius: 10px;
 }
 
-/* Стили для ссылок */
+
 a {
     color: #ffffff;
     transition: color 0.3s;
@@ -186,191 +295,91 @@ a:hover {
     color: #ecf0f1;
 }
 
-/* Кнопка сворачивания */
-.fold-button {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    border: none;
-    padding: 5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s;
-}
 
-.fold-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-
-/* Свернутый пост */
-.one-post.folded .article-info,
-.one-post.folded .article-text {
-    display: none;
-}
-
-/* Футер */
 .site-footer {
     text-align: center;
     padding: 20px;
+
     background: rgba(0, 0, 0, 0.2);
+
     margin-top: 40px;
+
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .site-footer p {
     margin: 5px 0;
     font-size: 14px;
+
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Кнопка "Наверх" */
+
 #topButton {
     position: fixed;
+
     bottom: 20px;
     right: 20px;
+
     padding: 10px 20px;
+
     background: #ffffff;
+
     color: #1abc9c;
+
     border: none;
+
     border-radius: 5px;
+
     cursor: pointer;
+
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
     transition: all 0.3s;
 }
 
 #topButton:hover {
     background: #34495e;
     color: #ffffff;
+
     transform: translateY(-2px);
 }
 
-/* Пустое сообщение */
-.empty-message {
-    text-align: center;
-    font-size: 18px;
-    padding: 40px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-.one-post {
-    position: relative;  /* Для позиционирования тени */
-    overflow: hidden;
-}
 
-.one-post-shadow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    pointer-events: none;  /* Чтобы тень не мешала кликам */
-    z-index: 1;
-    border-radius: 10px;
-    transition: opacity 0.3s;
-}
-
-/* Контент поста должен быть выше тени */
-.one-post > *:not(.one-post-shadow) {
-    position: relative;
-    z-index: 2;
-}
-
-/* Эффект для логотипа */
-.header img {
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.header img:hover {
-    transform: scale(1.1);
-}
-.posts-counter {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: right;
-    font-size: 14px;
-}
-
-/* Чередование четных/нечетных постов */
-.post-even {
-    border-left: 5px solid rgba(255, 255, 255, 0.3);
-}
-
-.post-odd {
-    border-right: 5px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Подсказки */
-[title] {
-    cursor: help;
-}
-
-/* Анимация появления */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.one-post {
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* Стили для иконок в датах */
-.article-created-date {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-/* Эффект пульсации */
-.ui-effects-pulsate {
-    animation: pulsate 1s ease-in-out;
-}
-
-@keyframes pulsate {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-.content-wrapper {
-    position: relative;
-    z-index: 5;
-    background: #1abc9c;
-    min-height: 100vh;
-}
-
-/* Стили для шапки с параллаксом */
-.parallax-header {
-    position: relative;
-    z-index: 10;
-}
-
-/* Улучшенные стили для карточек статей */
-.one-post {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Анимация для появления статей */
 @keyframes slideUp {
     from {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.one-post {
-    animation: slideUp 0.5s ease-out forwards;
-    animation-delay: calc(var(--post-index, 0) * 0.1s);
+.ui-effects-pulsate {
+    animation: pulsate 1s ease-in-out;
+}
+
+@keyframes pulsate {
+
+    0% { transform: scale(1); }
+
+    50% { transform: scale(1.05); }
+
+    100% { transform: scale(1); }
+
+}
+
+
+[title] {
+    cursor: help;
+}
+
+.parallax-header {
+    position: relative;
+    z-index: 10;
 }

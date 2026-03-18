@@ -1,122 +1,77 @@
-/* parallax.css */
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-/* Шапка с параллаксом */
+/* Контекст позиционирования для шапки */
 .parallax-header {
-    position: relative;
-    background: #16a085;  /* Темнее основного фона */
-    min-height: 300px;
-    overflow: hidden;
-    margin-bottom: 40px;
+    position: relative !important;
+    overflow: hidden !important;
+    min-height: 350px !important;
+    background: #1abc9c !important;
+    z-index: 5 !important;
 }
 
-/* Контейнер для иконок параллакса */
+/* Контейнер для иконок */
 .icons-for-parallax {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;  /* Чтобы иконки не мешали кликам */
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
 }
 
-/* Общие стили для всех иконок */
+/* Базовые стили для всех иконок */
 .icon-for-parallax {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0.3;
-    transition: opacity 0.3s;
+    position: absolute !important;
+    display: block !important;
+    
+    /* Сбрасываем все возможные конфликтующие стили */
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    
+    /* Запрещаем растягивание */
+    height: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    
+    /* Начальная прозрачность */
+    opacity: 0.6;
 }
 
-/* Разные размеры и позиции для каждой иконки */
+/* Передний план */
 .icon-first {
-    width: 200px;
-    margin-left: -300px;  /* Сдвиг влево */
-    z-index: 3;  /* На переднем плане */
+    width: 200px !important;
+    bottom: 50px !important;
+    left: 60% !important;
+    z-index: 30 !important;
+    opacity: 0.8;
 }
 
+/* Средний план */
 .icon-second {
-    width: 175px;
-    margin-left: -100px;  /* Меньше сдвиг */
-    margin-bottom: 50px;
-    z-index: 2;  /* Средний слой */
+    width: 175px !important;
+    bottom: 30px !important;
+    left: 65% !important;
+    z-index: 20 !important;
+    opacity: 0.6;
 }
 
+/* Дальний план */
 .icon-third {
-    width: 150px;
-    margin-left: 100px;  /* Сдвиг вправо */
-    margin-bottom: 100px;
-    z-index: 1;  /* На заднем плане */
+    width: 150px !important;
+    bottom: 10px !important;
+    left: 70% !important;
+    z-index: 10 !important;
+    opacity: 0.4;
 }
 
-/* Контент шапки (поверх иконок) */
+/* Контент шапки */
 .header-content {
-    position: relative;
-    z-index: 10;
+    position: relative !important;
+    z-index: 100 !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 40px;
     background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-}
-
-.header-content .logo {
-    height: 60px;
-    width: auto;
-}
-
-.header-text-area {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.service-title {
-    font-size: 28px;
-    margin: 0;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Основной контент */
-.content-wrapper {
-    position: relative;
-    z-index: 5;
-    background: #1abc9c;
-    padding: 20px 0;
-}
-
-/* Адаптация для мобильных */
-@media (max-width: 768px) {
-    .icon-first {
-        width: 150px;
-        margin-left: -200px;
-    }
-    
-    .icon-second {
-        width: 125px;
-        margin-left: -50px;
-    }
-    
-    .icon-third {
-        width: 100px;
-        margin-left: 50px;
-    }
-    
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-    
-    .header-text-area {
-        flex-direction: column;
-    }
 }

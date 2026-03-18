@@ -1,88 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
     <title>Архив всех статей</title>
+
     {% load static %}
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/parallax.css' %}">
 </head>
+
 <body class="archive">
-    <div class="header parallax-header">
-        <div class="icons-for-parallax">
-            <img class="icon-for-parallax icon-first" 
-                 src="{% static 'img/article-icon-for-parallax.png' %}" 
-                 alt="Parallax Icon 1">
-            <img class="icon-for-parallax icon-second" 
-                 src="{% static 'img/article-icon-for-parallax.png' %}" 
-                 alt="Parallax Icon 2">
-            <img class="icon-for-parallax icon-third" 
-                 src="{% static 'img/article-icon-for-parallax.png' %}" 
-                 alt="Parallax Icon 3">
-        </div>
-        
-        <div class="header-content">
-            <img src="{% static 'img/logo.png' %}" alt="Логотип" class="logo">
-            <div class="header-text-area">
-                <h1 class="service-title">Коллективный блог</h1>
-                <div class="header-menu">
-                    {% if user.is_authenticated %}
-                        <span class="username">{{ user.username }}</span>
-                        <a href="{% url 'create_post' %}" class="menu-btn">Новая статья</a>
-                        <a href="{% url 'logout' %}" class="menu-btn">Выйти</a>
-                    {% else %}
-                        <a href="{% url 'login' %}" class="menu-btn">Вход</a>
-                        <a href="{% url 'register' %}" class="menu-btn">Регистрация</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="content-wrapper">
-        <div class="archive">
-            <!-- СЧЕТЧИК -->
-            <div class="posts-counter">
-                Всего статей: {{ posts|length }}
-            </div>
-            
-            <!-- Цикл вывода всех статей -->
-            {% for post in posts %}
-            <div class="one-post {% cycle 'post-odd' 'post-even' %}" 
-                 style="--post-index: {{ forloop.counter0 }};">
-                
-                <div class="post-header">
-                    <h2 class="post-title">
-                        <a href="{% url 'get_article' post.id %}">{{ post.title }}</a>
-                    </h2>
-                    <button class="fold-button">свернуть</button>
-                </div>
-                
-                <div class="article-info">
-                    <div class="article-author">{{ post.author.username }}</div>
-                    <!-- ИКОНКА -->
-                    <div class="article-created-date">
-                        📅 {{ post.created_date|date:"d.m.Y" }}
-                    </div>
-                </div>
-                
-                <p class="article-text">{{ post.get_excerpt }}</p>
-                <div class="one-post-shadow"></div>
-            </div>
-            {% empty %}
-            <div class="empty-message">
-                <p>Пока нет статей.</p>
-            </div>
-            {% endfor %}
-        </div>
+
+<div class="header parallax-header">
+
+    <!-- Иконки параллакса -->
+
+    <div class="icons-for-parallax">
+
+        <img class="icon-for-parallax icon-first"
+             src="{% static 'img/article-icon-for-parallax.png' %}"
+             alt="Parallax Icon 1">
+
+        <img class="icon-for-parallax icon-second"
+             src="{% static 'img/article-icon-for-parallax.png' %}"
+             alt="Parallax Icon 2">
+
+        <img class="icon-for-parallax icon-third"
+             src="{% static 'img/article-icon-for-parallax.png' %}"
+             alt="Parallax Icon 3">
+
     </div>
 
-    <!-- Подключаем jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    
-    <!-- JavaScript файлы -->
-    <script src="{% static 'js/helloworld.js' %}"></script>
-    <script src="{% static 'js/fold-post.js' %}"></script>
-    <script src="{% static 'js/highlight-post.js' %}"></script>
-    <script src="{% static 'js/parallax.js' %}"></script>
+    <!-- Контент шапки -->
+
+    <div class="header-content">
+
+        <img src="{% static 'img/logo.png' %}" alt="Логотип" class="logo">
+
+        <div class="header-text-area">
+
+            <h1 class="service-title">Коллективный блог</h1>
+
+            <div class="header-menu">
+
+                {% if user.is_authenticated %}
+
+                    <span class="username">{{ user.username }}</span>
+
+                    <a href="{% url 'create_post' %}" class="menu-btn">
+                        Новая статья
+                    </a>
+
+                    <a href="{% url 'logout' %}" class="menu-btn">
+                        Выйти
+                    </a>
+
+                {% else %}
+
+                    <a href="{% url 'login' %}" class="menu-btn">
+                        Вход
+                    </a>
+
+                    <a href="{% url 'register' %}" class="menu-btn">
+                        Регистрация
+                    </a>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="content-wrapper">
+
+    <div class="archive">
+
+        <!-- Счетчик статей -->
+
+        <div class="posts-counter">
+            Всего статей: {{ posts|length }}
+        </div>
+
+
+        <!-- Цикл статей -->
+
+        {% for post in posts %}
+
+        <div class="one-post {% cycle 'post-odd' 'post-even' %}"
+             style="--post-index: {{ forloop.counter0 }};">
+
+
+            <!-- Заголовок статьи -->
+
+            <div class="post-header">
+
+                <h2 class="post-title">
+
+                    <a href="{% url 'get_article' post.id %}">
+                        {{ post.title }}
+                    </a>
+
+                </h2>
+
+                <button class="fold-button">
+                    свернуть
+                </button>
+
+            </div>
+
+
+            <!-- Информация -->
+
+            <div class="article-info">
+
+                <div class="article-author">
+                    {{ post.author.username }}
+                </div>
+
+            </div>
+
+
+            <!-- Текст статьи -->
+
+            <p class="article-text">
+                {{ post.get_excerpt }}
+            </p>
+
+
+            <!-- Тень -->
+
+            <div class="one-post-shadow"></div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-message">
+            <p>Пока нет статей.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<!-- jQuery -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Скрипты -->
+
+<script src="{% static 'js/helloworld.js' %}"></script>
+
+<script src="{% static 'js/fold-post.js' %}"></script>
+
+<script src="{% static 'js/highlight-post.js' %}"></script>
+
+<script src="{% static 'js/parallax.js' %}"></script>
+
+
 </body>
 </html>
